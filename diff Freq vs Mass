@@ -1,0 +1,41 @@
+import numpy as np
+import math
+from matplotlib import pyplot as plt
+# plt.style.use("fivethirtyeight")
+
+mass = []
+acc = []
+
+H = 100 ## kg
+u = 1/5 ## frictional coefficient
+m = 450 # Maximum load you want to input an later denoted by i
+
+
+freq = {}
+amp = {}
+
+for i in range(50, m, 50):
+    
+    a = (H/i) - u
+    acc.append(a)
+    
+    freq['fre_' + str(i)] = []
+    amp['amp_' + str(i)] = 1000*[]
+    
+    
+    for j in range (5, 100, 5): ### j is the amplitude
+       
+        amp['amp_' + str(i)].append(j)
+        
+        f =math.sqrt(a/(j/1000)) / (2 * math.pi )
+        freq['fre_' + str(i)].append(f)
+        
+        
+    mass.append(i)
+
+
+for i in range(50, m, 50):
+      plt.plot(freq['fre_' + str(i)], amp['amp_' + str(i)], label= (str(i) + "kg"))
+
+
+plt.show()
